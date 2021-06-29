@@ -19,6 +19,12 @@ custom:
       port: 8000
       inMemory: true
       migrate: true
+      seed: true
+    seed:
+      development:
+        sources:
+          - table: users
+            sources: [./migrations/users.json]
 
 functions:
   hello:
