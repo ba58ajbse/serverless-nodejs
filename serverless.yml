@@ -11,6 +11,13 @@ plugins:
   - serverless-offline
   - serverless-dynamodb-local
 
+custom:
+  dynamodb:
+    stages:
+      - dev
+    start:
+      inMemory: true
+
 functions:
   hello:
     handler: handler.hello

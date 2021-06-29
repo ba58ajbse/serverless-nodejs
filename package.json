@@ -5,6 +5,7 @@
     "serverless-offline": "^7.0.0"
   },
   "scripts": {
-    "start": "npx sls offline start"
+    "start": "npx sls offline start",
+    "start:db": "npx sls dynamodb start"
   }
 }
