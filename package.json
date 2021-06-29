@@ -1,9 +1,14 @@
 {
   "devDependencies": {
     "serverless": "^2.48.1",
+    "serverless-dynamodb-local": "^0.2.39",
     "serverless-offline": "^7.0.0"
   },
   "scripts": {
-    "start": "npx sls offline start"
+    "start": "npx sls offline start",
+    "start:db": "npx sls dynamodb start"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.936.0"
   }
 }
