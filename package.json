@@ -7,5 +7,8 @@
   "scripts": {
     "start": "npx sls offline start",
     "start:db": "npx sls dynamodb start"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.936.0"
   }
 }
