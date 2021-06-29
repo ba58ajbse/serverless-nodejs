@@ -16,7 +16,9 @@ custom:
     stages:
       - dev
     start:
+      port: 8000
       inMemory: true
+      migrate: true
 
 functions:
   hello:
@@ -25,3 +27,19 @@ functions:
       - http:
           path: /hello
           method: get
+
+resources:
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: users
+        AttributeDefinitions:
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
