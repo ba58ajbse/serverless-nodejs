@@ -1,10 +1,10 @@
 const AWS = require('aws-sdk');
 const dynamodb = process.env.IS_OFFLINE
-                  ? new AWS.DynamoDB.DocumentClient({
-                    region: 'localhost',
-                    endpoint: 'http://localhost:8000',
-                  })
-                  : new AWS.DynamoDB.DocumentClient();
+  ? new AWS.DynamoDB.DocumentClient({
+      region: 'localhost',
+      endpoint: 'http://localhost:8000',
+    })
+  : new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
   const params = { TableName: 'users' };
@@ -25,5 +25,5 @@ exports.handler = async (event) => {
     statusCode,
     body,
     headers,
-  }
-}
+  };
+};
