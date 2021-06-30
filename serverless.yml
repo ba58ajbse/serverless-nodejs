@@ -1,6 +1,6 @@
 service: serverless-nodejs
 
-frameworkVersion: "2"
+frameworkVersion: '2'
 
 provider:
   name: aws
@@ -10,14 +10,14 @@ provider:
   iam:
     role:
       statements:
-        - Effect: "Allow"
+        - Effect: 'Allow'
           Action:
             - dynamodb:Scan
             - dynamodb:GetItem
             - dynamodb:PutItem
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
-          Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/users"
+          Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/users'
 
 plugins:
   - serverless-offline
@@ -26,11 +26,13 @@ plugins:
 package:
   excludeDevDependencies: false
   patterns:
-    - "!node_modules/**"
-    - "!.dynamodb/**"
-    - "!migrations/**"
-    - "!package.json"
-    - "!yarn.lock"
+    - '!node_modules/**'
+    - '!.dynamodb/**'
+    - '!migrations/**'
+    - '!package.json'
+    - '!yarn.lock'
+    - '!.prettierrc.json'
+    - '!.vscode/**'
 
 custom:
   dynamodb:
@@ -54,12 +56,14 @@ functions:
       - http:
           path: /users
           method: get
+          cors: true
   put:
     handler: users/put.handler
     events:
       - http:
           path: /users
           method: post
+          cors: true
 
 resources:
   Resources:
