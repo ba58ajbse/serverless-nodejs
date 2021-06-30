@@ -26,9 +26,11 @@ plugins:
 package:
   excludeDevDependencies: false
   patterns:
-    - '!node_modules/**'
-    - '!.dynamodb/**'
-    - '!migrations/**'
+    - "!node_modules/**"
+    - "!.dynamodb/**"
+    - "!migrations/**"
+    - "!package.json"
+    - "!yarn.lock"
 
 custom:
   dynamodb:
@@ -47,13 +49,13 @@ custom:
 
 functions:
   scan:
-    handler: functions/users/scan.handler
+    handler: users/scan.handler
     events:
       - http:
           path: /users
           method: get
   put:
-    handler: functions/users/put.handler
+    handler: users/put.handler
     events:
       - http:
           path: /users
