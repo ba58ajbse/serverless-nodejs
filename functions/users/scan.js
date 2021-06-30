@@ -13,7 +13,7 @@ exports.handler = async (event) => {
   let body;
 
   try {
-    data = await dynamodb.scan(params).promise();
+    const data = await dynamodb.scan(params).promise();
     statusCode = 200;
     body = JSON.stringify({ users: data['Items'] });
   } catch (error) {
