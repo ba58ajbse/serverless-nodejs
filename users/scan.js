@@ -1,10 +1,10 @@
 const AWS = require('aws-sdk');
 const dynamodb = process.env.IS_OFFLINE
-                  ? new AWS.DynamoDB.DocumentClient({
-                    region: 'localhost',
-                    endpoint: 'http://localhost:8000',
-                  })
-                  : new AWS.DynamoDB.DocumentClient();
+  ? new AWS.DynamoDB.DocumentClient({
+      region: 'localhost',
+      endpoint: 'http://localhost:8000',
+    })
+  : new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
   const params = { TableName: 'users' };
@@ -13,7 +13,7 @@ exports.handler = async (event) => {
   let body;
 
   try {
-    data = await dynamodb.scan(params).promise();
+    const data = await dynamodb.scan(params).promise();
     statusCode = 200;
     body = JSON.stringify({ users: data['Items'] });
   } catch (error) {
@@ -25,5 +25,5 @@ exports.handler = async (event) => {
     statusCode,
     body,
     headers,
-  }
-}
+  };
+};

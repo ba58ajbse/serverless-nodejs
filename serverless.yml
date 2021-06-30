@@ -1,23 +1,38 @@
 service: serverless-nodejs
 
-frameworkVersion: "2"
+frameworkVersion: '2'
 
 provider:
   name: aws
   runtime: nodejs14.x
   lambdaHashingVersion: 20201221
   region: ap-northeast-1
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: 'arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/users'
 
 plugins:
   - serverless-offline
   - serverless-dynamodb-local
 
 package:
-  exclude:
-    - migrations/**
-    - node_modules/**
-    - .dynamodb/**
-    - .git/**
+  excludeDevDependencies: false
+  patterns:
+    - '!node_modules/**'
+    - '!.dynamodb/**'
+    - '!migrations/**'
+    - '!package.json'
+    - '!yarn.lock'
+    - '!.prettierrc.json'
+    - '!.vscode/**'
 
 custom:
   dynamodb:
@@ -35,18 +50,20 @@ custom:
             sources: [./migrations/users.json]
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: /hello
-          method: get
-  users:
-    handler: users.handler
+  scan:
+    handler: users/scan.handler
     events:
       - http:
           path: /users
           method: get
+          cors: true
+  put:
+    handler: users/put.handler
+    events:
+      - http:
+          path: /users
+          method: post
+          cors: true
 
 resources:
   Resources:
