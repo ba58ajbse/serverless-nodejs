@@ -86,6 +86,17 @@ functions:
               paths:
                 id: true
           cors: true
+  update:
+    handler: users/update.handler
+    events:
+      - http:
+          path: /users/{id}
+          method: put
+          request:
+            parameters:
+              paths:
+                id: true
+          cors: true
 
 resources:
   Resources:
