@@ -64,6 +64,39 @@ functions:
           path: /users
           method: post
           cors: true
+  get:
+    handler: users/get.handler
+    events:
+      - http:
+          path: /users/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
+          cors: true
+  delete:
+    handler: users/delete.handler
+    events:
+      - http:
+          path: /users/{id}
+          method: delete
+          request:
+            parameters:
+              paths:
+                id: true
+          cors: true
+  update:
+    handler: users/update.handler
+    events:
+      - http:
+          path: /users/{id}
+          method: put
+          request:
+            parameters:
+              paths:
+                id: true
+          cors: true
 
 resources:
   Resources:
@@ -72,10 +105,10 @@ resources:
       Properties:
         TableName: users
         AttributeDefinitions:
-          - AttributeName: email
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: email
+          - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
