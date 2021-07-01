@@ -64,6 +64,17 @@ functions:
           path: /users
           method: post
           cors: true
+  get:
+    handler: users/get.handler
+    events:
+      - http:
+          path: /users/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
+          cors: true
 
 resources:
   Resources:
@@ -72,15 +83,11 @@ resources:
       Properties:
         TableName: users
         AttributeDefinitions:
-          - AttributeName: email
-            AttributeType: S
-          - AttributeName: created_at
-            AttributeType: S
+          - AttributeName: id
+            AttributeType: N
         KeySchema:
-          - AttributeName: email
+          - AttributeName: id
             KeyType: HASH
-          - AttributeName: created_at
-            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
