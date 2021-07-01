@@ -9,8 +9,11 @@ const dynamodb = process.env.IS_OFFLINE
 exports.handler = async (event) => {
   let statusCode = 200;
   let body;
-  const headers = { 'Content-Type': 'application/json' };
-  const id = Number(event.pathParameters.id);
+  const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  };
+  const id = event.pathParameters.id;
 
   if (!id) {
     return {

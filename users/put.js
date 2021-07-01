@@ -16,7 +16,7 @@ exports.handler = async (event) => {
   };
 
   const event_body = JSON.parse(event.body);
-  const id = Number(event_body.id);
+  const id = event_body.id;
   const email = event_body.email;
   const name = event_body.name;
 
