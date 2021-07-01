@@ -75,6 +75,17 @@ functions:
               paths:
                 id: true
           cors: true
+  delete:
+    handler: users/delete.handler
+    events:
+      - http:
+          path: /users/{id}
+          method: delete
+          request:
+            parameters:
+              paths:
+                id: true
+          cors: true
 
 resources:
   Resources:
