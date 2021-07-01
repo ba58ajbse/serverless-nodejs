@@ -20,7 +20,7 @@ exports.handler = async (event) => {
   const email = event_body.email;
   const name = event_body.name;
 
-  if (!id || !email) {
+  if (!id || !email || !name) {
     return {
       statusCode: 403,
       body: JSON.stringify('Forbidden'),
