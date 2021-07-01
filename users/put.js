@@ -18,6 +18,7 @@ exports.handler = async (event) => {
   const event_body = JSON.parse(event.body);
   const id = Number(event_body.id);
   const email = event_body.email;
+  const name = event_body.name;
 
   if (!id || !email) {
     return {
@@ -27,11 +28,17 @@ exports.handler = async (event) => {
     };
   }
 
+  const dateTime = new Date();
+  const created_at = dateTime.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }).replace(/\//g, '-');
+
   const params = {
     TableName: 'users',
     Item: {
       id,
       email,
+      name,
+      created_at,
+      updated_at: created_at,
     },
   };
 

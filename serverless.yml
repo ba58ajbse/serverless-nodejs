@@ -74,9 +74,13 @@ resources:
         AttributeDefinitions:
           - AttributeName: email
             AttributeType: S
+          - AttributeName: created_at
+            AttributeType: S
         KeySchema:
           - AttributeName: email
             KeyType: HASH
+          - AttributeName: created_at
+            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
