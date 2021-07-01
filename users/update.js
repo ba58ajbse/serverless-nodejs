@@ -53,8 +53,8 @@ exports.handler = async (event) => {
     statusCode = 200;
     body = JSON.stringify({ id, email, name, updated_at });
   } catch (error) {
-    statusCode = 400;
-    body = JSON.stringify({ statusCode: error.statusCode, error: error });
+    statusCode = error.statusCode;
+    body = JSON.stringify({ statusCode, error: error.message });
   }
 
   return {
