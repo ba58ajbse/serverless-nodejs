@@ -7,6 +7,9 @@ provider:
   runtime: nodejs14.x
   lambdaHashingVersion: 20201221
   region: ap-northeast-1
+  apiGateway:
+    apiKeys:
+      - myFirstKey
   iam:
     role:
       statements:
@@ -23,6 +26,8 @@ plugins:
   - serverless-offline
   - serverless-dynamodb-local
 
+useDotenv: true
+
 package:
   excludeDevDependencies: false
   patterns:
@@ -33,6 +38,7 @@ package:
     - '!yarn.lock'
     - '!.prettierrc.json'
     - '!.vscode/**'
+    - '!.env.dev'
 
 custom:
   dynamodb:
@@ -75,6 +81,7 @@ functions:
               paths:
                 id: true
           cors: true
+          private: true
   delete:
     handler: users/delete.handler
     events:
@@ -86,6 +93,9 @@ functions:
               paths:
                 id: true
           cors: true
+          authorizer:
+            name: authorizer
+            arn: ${env: COGNITO_ARN}
   update:
     handler: users/update.handler
     events:
