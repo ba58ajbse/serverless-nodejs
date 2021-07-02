@@ -95,7 +95,7 @@ functions:
           cors: true
           authorizer:
             name: authorizer
-            arn: ${env: COGNITO_ARN}
+            arn: ${env:COGNITO_ARN}
   update:
     handler: users/update.handler
     events:
